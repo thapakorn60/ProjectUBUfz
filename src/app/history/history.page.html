@@ -1,0 +1,46 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-row>
+            <ion-button color="warning" fill="clear" (click)="dismiss()">
+                <ion-icon name="arrow-back-outline"></ion-icon>
+            </ion-button>
+            <ion-title color="warning">History</ion-title>
+        </ion-row>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content color="dark">
+
+    <ion-card *ngFor="let hi of myHistory">
+        <!-- <ion-header>
+            <ion-toolbar>
+                <ion-label>
+                    <h2>Eventname</h2>
+                </ion-label>
+            </ion-toolbar>
+        </ion-header> -->
+        <!-- <ion-card-content> -->
+        <ion-item>
+            <ion-icon name="time"></ion-icon>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <ion-label>
+                <p>{{hi.postName}} ({{hi.type}})</p>
+                <p>{{hi.place}} วันที่ {{hi.datetime|date:"dd/MM/yyyy"}}</p>
+                <p>by {{hi.ownerName}}</p>
+                <!-- <p>{{dateNow | date: "dd/MM/yyyy" }}</p> -->
+            </ion-label>
+            <!-- <div>
+                <ion-avatar slot="start">
+                    <ion-img src="assets/images/thor.jpg"></ion-img>
+                </ion-avatar>
+            </div> -->
+            <ion-button fill="clear" color="danger" (click)="deleteHistory(hi._id)">
+                <ion-icon name="trash"></ion-icon>
+            </ion-button>
+        </ion-item>
+        <!-- </ion-card-content> -->
+    </ion-card>
+
+
+
+</ion-content>

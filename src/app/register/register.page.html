@@ -1,0 +1,216 @@
+<ion-header>
+    <ion-toolbar *ngIf="mode == 'create'">
+        <ion-row>
+            <ion-button fill="clear" color="warning" routerLink="/login">
+                <ion-icon color="warning" name="arrow-back"></ion-icon>
+            </ion-button>
+            <ion-title color="light">ลงทะเบียน</ion-title>
+        </ion-row>
+    </ion-toolbar>
+    <ion-toolbar *ngIf="mode == 'edit'">
+        <ion-row>
+            <ion-button fill="clear" color="warning" href="home">
+                <ion-icon color="warning" name="arrow-back"></ion-icon>
+            </ion-button>
+            <ion-title color="light">แก้ไขโปรไฟล์</ion-title>
+        </ion-row>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content color="dark">
+    <ion-card>
+        <div>
+            <!-- <form [formGroup]="form" (ngSubmit)="register()"> -->
+            <!-- <ion-grid> -->
+                <ion-row>
+                    <ion-col></ion-col>
+                    <ion-col>
+                <ion-avatar *ngIf="image == null">
+                    <img *ngIf="mode == 'create'" src="https://i.pinimg.com/originals/0c/3b/3a/0c3b3adb1a7530892e55ef36d3be6cb8.png">
+                    <img *ngIf="mode == 'edit'" [src]="person.img">
+                </ion-avatar>
+                <ion-avatar *ngIf="image != null">
+                    <!-- <img src="https://i.pinimg.com/originals/0c/3b/3a/0c3b3adb1a7530892e55ef36d3be6cb8.png"> -->
+                        <img [src]="image">
+                    </ion-avatar>
+                <ion-input  (change)="uploadFile($event)"  [(ngModel)]="person.img" name="img" type="file" class="inputfile" accept="image/*" class="upload"></ion-input>
+                <!-- <ion-input (change)="uploadFile($event)" formControlName="img" name="img" type="file" class="inputfile inputfile-4" accept="image/*" class="upload"></ion-input> -->
+                <!-- <label for="file">Choose a file</label> -->
+            </ion-col>
+            <ion-col></ion-col>
+                </ion-row>
+                <!-- <center >
+                    <ion-icon name="person-circle-outline" size="large"></ion-icon>
+                    <p>เลือกรูปภาพ</p>
+                </center> -->
+
+
+
+                <!-- <ion-row> -->
+                    <ion-item>
+                        <ion-label position="floating">ชื่อ *</ion-label>
+                        <!-- <ion-input type="text"  formControlName="name" name="name" required></ion-input> -->
+                        <ion-input type="text"  [(ngModel)]="person.name" name="name" required></ion-input>
+
+                    </ion-item>
+                <!-- </ion-row> -->
+
+                <!-- <ion-row> -->
+                    <ion-item>
+                        <ion-label position="floating">โทรศัพท์</ion-label>
+                        <!-- <ion-input type="text" formControlName="tel" name="tel"></ion-input> -->
+                        <ion-input type="text" [(ngModel)]="person.tel" name="tel"></ion-input>
+
+                    </ion-item>
+                <!-- </ion-row> -->
+
+                <!-- <ion-row> -->
+                    <ion-item>
+                        <ion-label position="fixed">อีเมลล์ *</ion-label>
+                        <!-- <ion-input type="text" formControlName="email" name="email" required></ion-input> -->
+                        <ion-input type="text" [(ngModel)]="person.email " name="email" placeholder="example.my.60" required></ion-input>
+                        <ion-label position="fixed">@ubu.ac.th</ion-label>
+                    </ion-item>
+                <!-- </ion-row> -->
+
+                <!-- <ion-row *ngIf="mode == 'create'"> -->
+                    <ion-item *ngIf="mode == 'create'">
+                        <ion-label position="floating">รหัสผ่าน * (อย่างน้อย 10 ตัว)</ion-label>
+                        <!-- <ion-input type="password" formControlName="password" name="password" required></ion-input> -->
+                        <ion-input type="password" [(ngModel)]="person.password" name="password" minlength="10" required></ion-input>
+
+                    </ion-item>
+                <!-- </ion-row> -->
+
+                <!-- <ion-row *ngIf="mode == 'create'">  -->
+                    <ion-item *ngIf="mode == 'create'">
+                        <ion-label position="floating">ยืนยันรหัสผ่าน</ion-label>
+                        <ion-input type="password" [(ngModel)]="cpass.cpass" name="cpassword"></ion-input>
+                    </ion-item>
+                <!-- </ion-row> -->
+
+
+
+                <!-- <ion-row> -->
+                    <ion-item>
+                        <ion-label position="floating">อายุ</ion-label>
+                        <!-- <ion-input type="number" formControlName="age" name="age"></ion-input> -->
+                        <ion-input type="number" [(ngModel)]="person.age" name="age"></ion-input>
+
+                    </ion-item>
+                <!-- </ion-row> -->
+
+
+                <ion-item>
+                    <ion-label>เพศ</ion-label>
+                    <!--  -->
+                    <!-- <ion-select placeholder="เลือกเพศ" formControlName="sex" name="sex"> -->
+                    <ion-select placeholder="เลือกเพศ" [(ngModel)]="person.sex" name="sex">
+
+                        <ion-select-option value="ชาย">ชาย</ion-select-option>
+                        <ion-select-option value="หญิง">หญิง</ion-select-option>
+                    </ion-select>
+                </ion-item>
+
+
+
+                <ion-item>
+                    <ion-label>Lifestyle *</ion-label>
+                    <!--  -->
+                    <!-- <ion-select placeholder="เลือก" multiple="true" color="success" formControlName="lifestyle" name="lifestyle" required> -->
+                    <ion-select placeholder="เลือก" multiple="true" color="success" [(ngModel)]="person.lifestyle" name="lifestyle" required>
+
+                        <ion-select-option value="อาหาร">อาหาร</ion-select-option>
+                        <ion-select-option value="กีฬา">กีฬา</ion-select-option>
+                        <ion-select-option value="บันเทิง">บันเทิง</ion-select-option>
+                        <ion-select-option value="การศึกษา">การศึกษา</ion-select-option>
+                        <ion-select-option value="กิจกรรม">กิจกรรม</ion-select-option>
+                        <ion-select-option value="อื่นๆ">อื่นๆ</ion-select-option>
+                    </ion-select>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label>การศึกษา</ion-label>
+                    <!--  -->
+                    <!-- <ion-select placeholder="เลือก" formControlName="educational" name="educational"> -->
+                    <ion-select placeholder="เลือก" [(ngModel)]="person.educational" name="educational">
+
+                        <ion-select-option value="ปริญญาตรี">ปริญญาตรี</ion-select-option>
+                        <ion-select-option value="ปริญญาโท">ปริญญาโท</ion-select-option>
+                        <ion-select-option value="ปริญญาเอก">ปริญญาเอก</ion-select-option>
+
+                    </ion-select>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label>คณะ</ion-label>
+                    <!--  -->
+                    <!-- <ion-select placeholder="เลือก" formControlName="faculty" name="faculty"> -->
+                    <ion-select placeholder="เลือก" [(ngModel)]="person.faculty" name="faculty">
+
+                        <ion-select-option value="วิทยาศาสตร์">วิทยาศาสตร์</ion-select-option>
+                        <ion-select-option value="บริหาร">บริหาร</ion-select-option>
+                        <ion-select-option value="รัฐศาสตร์">รัฐศาสตร์</ion-select-option>
+                        <ion-select-option value="นิติศาสตร์">นิติศาสตร์</ion-select-option>
+                        <ion-select-option value="เกษตรศาสตร์">เกษตรศาสตร์</ion-select-option>
+                        <ion-select-option value="วิศวกรรมศาสตร์">วิศวกรรมศาสตร์</ion-select-option>
+                        <ion-select-option value="แพทยศาสตร์">แพทยศาสตร์</ion-select-option>
+                    </ion-select>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label>ชั้นปี</ion-label>
+                    <!--  -->
+                    <!-- <ion-select placeholder="เลือก" formControlName="year" name="year"> -->
+                    <ion-select placeholder="เลือก" [(ngModel)]="person.year" name="year">
+
+                        <ion-select-option value="1">1</ion-select-option>
+                        <ion-select-option value="2">2</ion-select-option>
+                        <ion-select-option value="3">3</ion-select-option>
+                        <ion-select-option value="4">4</ion-select-option>
+                        <ion-select-option value="5">5</ion-select-option>
+                        <ion-select-option value="6">6</ion-select-option>
+                        <ion-select-option value="7">7</ion-select-option>
+                        <ion-select-option value="8">8</ion-select-option>
+                        <ion-select-option value="จบการศึกษา">จบการศึกษา</ion-select-option>
+                    </ion-select>
+                </ion-item>
+
+
+                <!-- <ion-row> -->
+                    <ion-item>
+                        <ion-label position="floating">Facebook</ion-label>
+                        <!-- <ion-input type="text" formControlName="facebook" name="facebook"></ion-input> -->
+                        <ion-input type="text" [(ngModel)]="person.facebook" name="facebook"></ion-input>
+
+                    </ion-item>
+                <!-- </ion-row> -->
+
+                <!-- <ion-row> -->
+                    <ion-item>
+                        <ion-label position="floating">Instagram</ion-label>
+                        <!-- <ion-input type="text" formControlName="instagram" name="instagram"></ion-input> -->
+                        <ion-input type="text" [(ngModel)]="person.instagram" name="instagram"></ion-input>
+
+                    </ion-item>
+                <!-- </ion-row> -->
+
+                <!-- <ion-row> -->
+                    <ion-item>
+                        <ion-label position="floating">อื่นๆ</ion-label>
+                        <!-- <ion-input type="text" formControlName="other" name="other"></ion-input> -->
+                        <ion-input type="text" [(ngModel)]="person.other" name="other"></ion-input>
+
+                    </ion-item>
+                <!-- </ion-row> -->
+
+
+                <ion-button *ngIf="mode == 'create'" fill="solid" expand="block" color="warning" type="submit" (click)="register()">Signup</ion-button>
+                <ion-button *ngIf="mode == 'edit'" fill="solid" expand="block" color="dark" type="submit" (click)="register()">แก้ไขเรียบร้อย</ion-button>
+
+
+            <!-- </ion-grid> -->
+            <!-- </form> -->
+        </div>
+    </ion-card>
+</ion-content>

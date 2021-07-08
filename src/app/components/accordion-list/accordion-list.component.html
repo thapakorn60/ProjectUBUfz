@@ -1,0 +1,38 @@
+<ion-card>
+    <ion-item (click)="toggleAccordion()">
+        <h2>
+            {{ name }}
+            <p>{{ description }}</p>
+            <p>{{time | date: "dd/MM/yyyy"}} ตั้งแต่เวลา {{start | date : "HH:mm"}} ถึง {{end | date: "HH:mm"}} </p>
+
+        </h2>
+        <span *ngIf="isMenuOpen">&#9650;</span>
+        <span *ngIf="!isMenuOpen">&#9660;</span>
+    </ion-item>
+    <!-- <p>15/03/2564</p> -->
+    <ion-card [ngClass]="this.isMenuOpen ? 'active' : 'inactive'" *ngFor="let user of joiner">
+        <ion-item>
+            <ion-grid>
+
+                <ion-row>
+                    <ion-avatar size="small">
+                        <ion-icon size="large" name="person-circle-outline"></ion-icon>
+                    </ion-avatar>
+                    <ion-label>
+                        <h4>{{user.joinerName}}</h4>
+                        <h5>wants to join</h5>
+                    </ion-label>
+                </ion-row>
+                <ion-row>
+                    <ion-label>
+                        <ion-button color="success">ยอมรับ</ion-button>
+                        <ion-button color="danger">ปฏิเสธ</ion-button>
+                    </ion-label>
+                </ion-row>
+
+            </ion-grid>
+        </ion-item>
+
+        <!-- <ion-button type="button" color="primary" fill="solid" size="default" (click)="broadcastName(name)">Console log me!</ion-button> -->
+    </ion-card>
+</ion-card>

@@ -1,0 +1,128 @@
+<ion-header>
+    <ion-toolbar color="dark">
+        <ion-row>
+            <ion-button fill="clear" color="warning" (click)="dismiss()">
+                <ion-icon name="arrow-back-outline"></ion-icon>
+            </ion-button>
+            <!-- <ion-button color="warning" (click)="dismiss()">
+                back to event
+            </ion-button> -->
+            <ion-title>JoinerEvent</ion-title>
+        </ion-row>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content color="dark">
+    <ion-slides #theSlides>
+        <ion-slide>
+            <ion-toolbar color="dark">
+                <ion-label color="warning">
+                    <h1>Joiner Request</h1>
+                </ion-label>
+                <ion-row>
+                    <ion-col></ion-col>
+                    <ion-col>
+                        <ion-button (click)="moveToNext(theSlides)" color="warning" fill="outline" size="small">
+                            <p>ดูรายชื่อคนในอีเว้นท์</p>&nbsp;
+                            <ion-icon name="arrow-forward"></ion-icon>
+                        </ion-button>
+                    </ion-col>
+                </ion-row>
+                <ion-card *ngFor="let user of joiner">
+                    <ion-item *ngIf="user.status == false" >
+                        <ion-row (click)="profileUser(user.joinerId)">
+                        
+                                <ion-item>
+                                    <div *ngFor="let im of imgUser">
+                                        <ion-avatar size="small" slot="start" *ngIf="im.joinId == user._id">
+                                            <!-- <ion-icon size="large" name="person-circle"></ion-icon> -->
+                                            <img *ngIf="im.img != ''" src={{im.img}}>
+                                            <img *ngIf="im.img == ''" src="https://oakbusinessconsultant.com/wp-content/uploads/2021/05/503257-200.png">
+        
+                                        </ion-avatar>
+                                        </div>
+                                    &nbsp;
+                                    <ion-label>
+                                        <h2>{{user.joinerName}}</h2>
+                                        <ion-card-subtitle>wants to join your event</ion-card-subtitle>
+                                        <!-- <ion-button fill="outline" size="small" color="dark" (click)="profileUser(user.joinerId)">
+                                            <ion-icon name="search"></ion-icon>
+                                            <ion-icon name="person"></ion-icon>
+                                        </ion-button> -->
+                                    </ion-label>
+                                </ion-item>
+                         
+                        </ion-row>
+
+                        <ion-row>
+                            <!-- <ion-label> -->
+                            <ion-col>
+                                <ion-button size="small" color="success" fill="outline" (click)="accept(user._id)">
+                                    <ion-icon name="checkmark"></ion-icon>
+                                    <!-- Accept -->
+                                </ion-button>
+                            </ion-col>
+                            <ion-col>
+                                <ion-button size="small" color="danger" fill="outline" (click)="reject(user._id)">
+                                    <ion-icon name="close"></ion-icon>
+                                    <!-- Reject -->
+                                </ion-button>
+                            </ion-col>
+                            <!-- </ion-label> -->
+                        </ion-row>
+
+                    </ion-item>
+                </ion-card>
+
+            </ion-toolbar>
+        </ion-slide>
+
+        <ion-slide>
+            <ion-toolbar color="dark">
+                <ion-label color="warning">
+                    <h1>Accepted</h1>
+                </ion-label>
+                <ion-row>
+                    <ion-col>
+                        <ion-button (click)="moveToPrev(theSlides)" color="warning" fill="outline" size="small">
+                            <ion-icon name="arrow-back"></ion-icon>&nbsp;
+                            <p>ดูรายการคำขอ</p>&nbsp;
+                        </ion-button>
+                    </ion-col>
+                    <ion-col></ion-col>
+                </ion-row>
+                <ion-card *ngFor="let user of joiner">
+                    <ion-item *ngIf="user.status == true">
+                        <ion-row (click)="profileUser(user.joinerId)">
+                            <ion-item>
+                             <!-- (click)="profileUser(user.joinerId)" -->
+                             <div *ngFor="let im of imgUser">
+                                <ion-avatar size="small" slot="start" *ngIf="im.joinId == user._id">
+                                    <!-- <ion-icon size="large" name="person-circle"></ion-icon> -->
+                                    <img *ngIf="im.img != ''" src={{im.img}}>
+                                    <img *ngIf="im.img == ''" src="https://oakbusinessconsultant.com/wp-content/uploads/2021/05/503257-200.png">
+
+                                </ion-avatar>
+                                </div>
+                                    <!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
+                                    <ion-label (click)="profileUser(user.joinerId)">
+                                        <h2>{{user.joinerName}}</h2>
+                                        <!-- <ion-card-subtitle>In your event</ion-card-subtitle> -->
+                                    </ion-label> 
+                                </ion-item>    
+                        </ion-row>
+                        <ion-row>
+                            <div>
+                            <ion-button  color="danger" fill="clear" (click)="leave(user._id)">
+                                <ion-icon name="close-circle" size="large"></ion-icon>
+                            </ion-button>
+                            </div>
+                        </ion-row>
+                    </ion-item>
+                </ion-card>
+            </ion-toolbar>
+        </ion-slide>
+        <br>
+    </ion-slides>
+
+</ion-content>

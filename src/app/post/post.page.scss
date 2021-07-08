@@ -1,0 +1,30 @@
+ion-toolbar {
+    --ion-background-color: #000000;
+}
+
+ion-content {
+    --ion-background-color: #494949;
+}
+
+ion-card {
+    --ion-background-color: #ffffff;
+}
+
+ion-datetime {
+    $date-picker-colour: #387ef5;
+
+    .selected_date_full,
+    .selected_date,
+    .popup-buttons .button {
+      background-color: $date-picker-colour !important;
+    }
+    .month_select,
+    .year_select,
+    .today {
+      border-color: $date-picker-colour !important;
+    }
+    .item-select:after,
+    .button-clear {
+      color: $date-picker-colour !important;
+    }
+  }

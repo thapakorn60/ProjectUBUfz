@@ -1,0 +1,120 @@
+<!-- <ion-toolbar>
+    <ion-header>
+    <ion-title></ion-title>
+</ion-header>
+</ion-toolbar>
+
+<ion-content>
+    <div class="ion-text-center">
+        <ion-label color="warning">
+            <h1>UBU Friends zone</h1>
+        </ion-label>
+    </div>
+
+    <form>
+        <ion-card>
+            <ion-row>
+                &nbsp;&nbsp;&nbsp;
+                <ion-col>
+                    <ion-item>
+
+                        <ion-label color="warning" position="floating">Email</ion-label>
+                        <ion-input color="warning" #email type="email" name="email " inputmode="email " color="dark "></ion-input>
+
+                    </ion-item>
+                </ion-col>
+
+            </ion-row>
+
+            <ion-row>
+
+                &nbsp;&nbsp;&nbsp;
+                <ion-col>
+                    <ion-item>
+                        <ion-label color="warning " position="floating ">Password</ion-label>
+                        <ion-input #password type="password" name="password" color="dark "></ion-input>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+            &nbsp; &nbsp; &nbsp;
+        </ion-card>
+
+        <ion-button size="large" expand="block" color="warning" type="submit ">Login Google</ion-button>
+        &nbsp; &nbsp;
+    </form>
+    <ion-button size="large " expand="block " color="warning " href="register ">Register</ion-button>
+
+</ion-content> -->
+<!-- <ion-header>
+    <ion-toolbar color="dark">
+        <ion-title color="warning">Login</ion-title>
+    </ion-toolbar>
+</ion-header> -->
+<!-- ----------------------------------------------------------------------------------------------------- -->
+<!-- <ion-content color="dark">
+    <ion-card>
+        <ion-col>
+            <ion-item>
+                <ion-label>
+                    email
+                </ion-label>
+                <ion-input [(ngModel)]="loginData.email"></ion-input>
+            </ion-item>
+        </ion-col>
+        <ion-col>
+            <ion-item>
+                <ion-label>
+                    password
+                </ion-label>
+                <ion-input [(ngModel)]="loginData.password" type="password"></ion-input>
+            </ion-item>
+        </ion-col>
+        <ion-col>
+
+            <ion-button expand="block" (click)="logIn()">
+                Login
+            </ion-button>
+            <ion-button expand="block" href="register">
+                Register
+            </ion-button>
+
+        </ion-col>
+    </ion-card>
+
+</ion-content> -->
+<!-- --------------------------------------------------------- -->
+  
+<ion-header class="background">
+    <ion-toolbar class="background">
+      <ion-buttons slot="start">
+        <ion-button color="primary">
+          <!-- <ion-icon slot="icon-only" name="arrow-back"></ion-icon> -->
+        </ion-button>
+      </ion-buttons>
+      <ion-buttons slot="end">
+        <ion-button color="warning" routerLink="/register">Sign up</ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content class="background">
+    <div id="header">
+      <h1>UBU friend's zone</h1>
+      <!-- <img src="assets/logo.png" /> -->
+    </div>
+  
+    <!-- <form id="form"> -->
+        <div>
+        <ion-item class="ion-margin-bottom">
+            <ion-input type="email" [(ngModel)]="loginData.email" placeholder="email"></ion-input>
+            <ion-icon name="mail"></ion-icon>
+          </ion-item>
+          <ion-item class="ion-margin-bottom">
+            <ion-input type="password" [(ngModel)]="loginData.password" placeholder="password"></ion-input>
+            <ion-icon name="key"></ion-icon>
+          </ion-item>
+      <ion-button expand="block" shape="round" color="warning" (click)="logIn()">Login</ion-button>
+      <!-- <ion-button expand="block" shape="round" color="warning" routerLink="/register">Sign up</ion-button> -->
+        </div>
+    <!-- </form> -->
+  </ion-content>

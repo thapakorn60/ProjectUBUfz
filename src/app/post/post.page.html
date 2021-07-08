@@ -1,0 +1,123 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-row>
+            <ion-buttons>
+                <ion-back-button color="warning" defaultHref="/home"></ion-back-button>
+            </ion-buttons>
+            <ion-title *ngIf="mode == 'create'" color="warning">สร้างอีเว้นท์</ion-title>
+            <ion-title *ngIf="mode == 'edit'"color="warning">แก้ไขอีเว้นท์</ion-title>
+
+        </ion-row>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content color="dark">
+    <ion-card>
+        <form>
+            <ion-list>
+
+                <ion-item>
+                    <ion-avatar slot="start">
+                        <img src={{userImg}}>
+                        <!-- <ion-icon size="large" name="person-circle"></ion-icon> -->
+                    </ion-avatar>
+                    <ion-label>
+                        <ion-input type="text" [(ngModel)]="Post.name" name="name" value="{{userName}}"></ion-input>
+                    </ion-label>
+                    <!-- <ion-input type="date" [(ngModel)]="Post.datePost" name="datePost" value="{{today | date: 'HH:mm dd/MM/yyyy'}}"></ion-input> -->
+                    <!-- <ion-datetime displayFormat="HH:mm" pickerFormat="HH:mm" [(ngModel)]="Post.datePost"></ion-datetime> -->
+                </ion-item>
+
+                <!-- <ion-label>
+                    <p>เครื่องหมาย * บังคับกรอก</p>
+                </ion-label> -->
+
+
+                <ion-item>
+ 
+                    
+                    <!-- <ion-label></ion-label> -->
+                    <ion-icon name="chatbox-ellipses-outline"></ion-icon>&nbsp;&nbsp;&nbsp;
+                    <ion-input [(ngModel)]="Post.eventname" name="eventname" placeholder="ชื่ออีเว้นท์ *" required></ion-input>
+
+
+                </ion-item>
+
+                <ion-item>
+                    <ion-textarea [(ngModel)]="Post.description" name="description" placeholder="พิมพ์อะไรสักหน่อย"></ion-textarea>
+                </ion-item>
+
+                <ion-item>
+                    <ion-icon name="list-outline"></ion-icon> &nbsp;&nbsp;&nbsp;
+                    <ion-label>หมวดหมู่ *</ion-label>
+                    <ion-select placeholder="เลือก" multiple="true" [(ngModel)]="Post.type" name="type" required>
+                        <ion-select-option value="อาหาร">อาหาร</ion-select-option>
+                        <ion-select-option value="กีฬา">กีฬา</ion-select-option>
+                        <ion-select-option value="บันเทิง">บันเทิง</ion-select-option>
+                        <ion-select-option value="การศึกษา">การศึกษา</ion-select-option>
+                        <ion-select-option value="กิจกรรม">กิจกรรม</ion-select-option>
+                        <ion-select-option value="อื่นๆ">อื่นๆ</ion-select-option>
+                    </ion-select>
+                </ion-item>
+
+                <ion-item>
+                    <ion-icon name="calendar-outline"></ion-icon>&nbsp;&nbsp;&nbsp;
+                    <ion-label>วันที่ *</ion-label>
+                    <!-- <ion-input type="date" [(ngModel)]="Post.datetime" name="datetime" value="{{today | date: 'HH:mm dd/MM/yyyy'}}"></ion-input> -->
+
+                    <ion-datetime [(ngModel)]="Post.datetime" name="datetime" displayFormat="DD/MM/YYYY" value="01 " min="2021" max="2025" placeholder="เลือกเวลา" required></ion-datetime>
+                </ion-item>
+                <ion-item>
+                    <ion-row>
+                        <ion-item>
+                            <ion-icon name="alarm-outline"></ion-icon>&nbsp;&nbsp;&nbsp;
+                            <ion-label>เวลาเริ่ม *</ion-label>
+                            <ion-datetime [(ngModel)]="Post.starttime" name="starttime" displayFormat="HH:mm" value="00 : 00" placeholder="เวลาเริ่มอีเว้นท์" required></ion-datetime>
+                        </ion-item>
+                        <ion-item>
+                            <ion-icon name="alarm-outline"></ion-icon>&nbsp;&nbsp;&nbsp;
+                            <ion-label>เวลาสิ้นสุด *</ion-label>
+                            <ion-datetime [(ngModel)]="Post.endtime" name="endtime" displayFormat="HH:mm" value="00 : 00" placeholder="เวลาสิ้นสุดอีเว้นท์" required></ion-datetime>
+                        </ion-item>
+                    </ion-row>
+                </ion-item>
+                <ion-item>
+                    <!-- <ion-label position="floating"></ion-label> -->
+                    <ion-icon name="location-outline"></ion-icon>&nbsp;&nbsp;&nbsp;
+                    <ion-input [(ngModel)]="Post.place" name="place" placeholder="สถานที่(ชื่อร้าน ชื่อสถานที่)"></ion-input>
+                </ion-item>
+
+                <!-- <ion-item>
+                    <ion-row>
+                        <ion-col>
+                            <ion-label position="fixed">ปักหมุดสถานที่</ion-label>
+                        </ion-col>
+                        <ion-col>
+                            <ion-button expand="block" color="success" class="ion-text-center" href="map">
+                                <ion-icon name="location-outline"></ion-icon>
+                            </ion-button>
+                        </ion-col>
+                    </ion-row>
+                </ion-item> -->
+
+                <ion-item>
+                    <ion-icon name="people-outline"></ion-icon>&nbsp;&nbsp;&nbsp;
+                    <ion-label position="fixed" required>จำนวนคน *</ion-label>
+                    <ion-input type="number" [(ngModel)]="Post.amount" name="amount" placeholder="ใส่จำนวนคน"></ion-input>
+                </ion-item>
+
+            </ion-list>
+
+            <!-- <ion-button fill="solid" size="large" color="success">POST</ion-button> -->
+        </form>
+        <!-- <ion-button fill="solid" expand="block" color="warning" routerLink="/home" (click)="addpost()">
+            POST
+        </ion-button> -->
+        <ion-button *ngIf="mode == 'create'" fill="solid" expand="block" color="warning" (click)="addpost()">
+                สร้างอีเว้นท์
+        </ion-button>
+        <ion-button *ngIf="mode == 'edit'" fill="solid" expand="block" color="warning" (click)="addpost()">
+            เรียบร้อย
+    </ion-button>
+    </ion-card>
+</ion-content>

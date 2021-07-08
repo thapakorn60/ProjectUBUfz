@@ -1,0 +1,141 @@
+<ion-header>
+    <ion-toolbar color="dark">
+        <ion-row>
+            <ion-buttons>
+                <ion-back-button color="warning" defaultHref="/home"></ion-back-button>
+            </ion-buttons>
+            <ion-title color="warning">Appointments</ion-title>
+        </ion-row>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content color="dark">
+    <ion-slides #theSlides>
+        <ion-slide>
+            <ion-toolbar color="dark">
+                <ion-label color="warning">
+                    <h1>ตารางอีเว้นท์ของฉัน</h1>
+                </ion-label>
+                <ion-row>
+                    <ion-col></ion-col>
+                    <ion-col>
+                        <ion-button (click)="moveToNext(theSlides)" color="warning" fill="outline" size="small">
+                            <p>ดูรายการการเข้าร่วมของฉัน</p>&nbsp;
+                            <ion-icon name="arrow-forward"></ion-icon>
+                        </ion-button>
+                    </ion-col>
+                </ion-row>
+                
+                <ion-card *ngFor="let listPost of myPost" color="light">
+                    <div *ngIf="((listPost.datetime | date:'dd/MM/yyyy') > (dateNow | date:'dd/MM/yyyy') || (listPost.datetime | date:'dd/MM/yyyy') == (dateNow | date:'dd/MM/yyyy')
+                        )">
+                    <ion-header>
+                        <ion-toolbar>
+                            <ion-title>
+                                <ion-label>
+                                    <h2>{{listPost.eventname}}</h2>
+                                </ion-label>
+                            </ion-title>
+                        </ion-toolbar>
+                    </ion-header>
+                    <ion-item>
+                        <!-- <ion-icon name="fast-food-outline"></ion-icon> -->
+                        <!-- <p>{{listPost.type}}</p> -->
+                        <!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
+                        <ion-row>
+                            <ion-label>
+                                <!-- <h1>Thanos</h1> -->
+
+                                <!-- <p>By {{listPost.name}}</p> -->
+                                <p>{{listPost.datetime | date: "dd/MM/yyyy"}} เริ่ม {{listPost.starttime | date: "HH:mm"}} ถึง {{listPost.endtime | date:"HH:mm"}}</p>
+                                <p>{{listPost.description}}</p>
+
+                            </ion-label>
+                        </ion-row>
+                    </ion-item>
+                    <ion-row>
+                        <ion-col class="ion-text-center">
+                            <ion-button expand="block" color="success" (click)="gotoComment(listPost.eventname, listPost._id, listPost.userid)">
+                                <ion-icon name="chatbox-ellipses"></ion-icon>
+                                &nbsp;
+                                <ion-label>ดูการพูดคุย</ion-label>
+                            </ion-button>
+                        </ion-col>
+
+                        <ion-col class="ion-text-center">
+                            <ion-button expand="block" color="danger" (click)="deletePost(listPost._id)">
+                                <div>ยกเลิกกิจกรรม</div>
+                            </ion-button>
+                        </ion-col>
+                    </ion-row>
+                    </div>
+                </ion-card>
+            </ion-toolbar>
+        </ion-slide>
+        <!-- ----------------------------------------------------------------------------------------------- -->
+        <ion-slide>
+            <ion-toolbar color="dark">
+                <ion-label color="warning">
+                    <h1>ตารางการเข้าร่วม</h1>
+                </ion-label>
+                <ion-row>
+                    <ion-col>
+                        <ion-button (click)="moveToPrev(theSlides)" color="warning" fill="outline" size="small">
+                            <ion-icon name="arrow-back"></ion-icon>&nbsp;
+                            <!-- <p>ดูอีเว้นท์ที่ฉันสร้าง</p>&nbsp; -->
+                        </ion-button>
+                    </ion-col>
+                    <ion-col></ion-col>
+                    <ion-col></ion-col>
+                </ion-row>
+                <ion-card *ngFor="let listJoin of myJoin">
+                    <div *ngIf="(listJoin.status == true && listJoin.joinerId == userId) && ((listJoin.datetime | date:'dd/MM/yyyy') > (dateNow | date:'dd/MM/yyyy') || (listJoin.datetime | date:'dd/MM/yyyy') == (dateNow | date:'dd/MM/yyyy')
+                        ) ">
+                        <ion-header>
+                            <ion-toolbar>
+                                <ion-title>
+                                    <ion-label>
+                                        <h2>{{listJoin.postName}}</h2>
+                                    </ion-label>
+                                </ion-title>
+                            </ion-toolbar>
+                        </ion-header>
+                        <!-- <ion-icon name="fast-food-outline"></ion-icon> -->
+                        <!-- <p>{{listJoin.type}}</p> -->
+                        <!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
+                        <ion-row>
+                            <ion-item>
+                                <ion-label>
+                                    <!-- <h1>Thanos</h1> -->
+                                    <!-- <h2>{{listJoin.postName}}</h2> -->
+                                    <p>{{listJoin.place}}</p>
+                                    <p>{{listJoin.description}}</p>
+                                    <p>{{listJoin.datetime | date: "dd/MM/yyyy"}} เริ่ม {{listJoin.starttime | date: "HH:mm"}} ถึง {{listJoin.endtime | date:"HH:mm"}}</p>
+                                    <p>By {{listJoin.ownerName}}</p>
+
+
+                                </ion-label>
+                            </ion-item>
+                        </ion-row>
+                        <ion-row>
+                            <ion-col>
+                                <ion-button expand="block" color="success" (click)="gotoComment(listJoin.postName, listJoin.postId, listJoin.ownerId)">
+                                    <ion-icon name="chatbox-ellipses"></ion-icon>
+                                    &nbsp;
+                                    <ion-label>ดูการพูดคุย</ion-label>
+                                </ion-button>
+                            </ion-col>
+                            <ion-col class="ion-text-center">
+                                <ion-button expand="block" color="danger" (click)="leavejoin(listJoin._id)">
+                                    <div>ออกจากกิจกรรม</div>
+                                </ion-button>
+                            </ion-col>
+                        </ion-row>
+                    </div>
+                </ion-card>
+            </ion-toolbar>
+        </ion-slide>
+        <!-- ----------------------------------------------------------------------------------------------- -->
+    </ion-slides>
+
+</ion-content>

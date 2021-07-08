@@ -1,0 +1,25 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>test</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <!-- <ion-list>
+        <ion-button [hidden] (click)="toggle()" color="success" *ngIf="isMe"></ion-button>
+        <ion-button [hidden] (click)="toggle()" color="danger" *ngIf="!isMe"></ion-button>
+    </ion-list>
+    <ion-list>
+        <ion-button (click)="toggle()" color="success" *ngIf="isMe"></ion-button>
+        <ion-button (click)="toggle()" color="danger" *ngIf="!isMe"></ion-button>
+    </ion-list> -->
+    <button ion-item (click)="openR()">open </button>
+    <div [hidden]="!status_0"> <button ion-item (click)="view()"> view</button></div>
+    <div [hidden]="!status_1"> <button ion-item (click)="share()"> share</button></div>
+    <div [hidden]="!status_0"> <button ion-item (click)="publish()"> publish</button></div>
+    <div [hidden]="!status_1"> <button ion-item (click)="copy()"> copy</button></div><button ion-item (click)="editData()"> edit</button>
+    <div [hidden]="!status_1"> <button ion-item (click)="updateData()"> update</button></div>
+
+
+
+</ion-content>

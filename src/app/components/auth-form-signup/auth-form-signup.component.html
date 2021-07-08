@@ -1,0 +1,123 @@
+<form [formGroup]="authForm">
+    <ion-item>
+        <ion-label position="stacked">Email</ion-label>
+        <ion-input [(ngModel)]="person.email" formControlName="email" type="email" placeholder="Your email address" [class.invalid]="!authForm.controls['email'].valid &&
+    authForm.controls['email'].touched">
+        </ion-input>
+    </ion-item>
+    <ion-item class="error-message" *ngIf="!authForm.controls['email'].valid &&
+     authForm.controls['email'].touched">
+        <ion-label>Please enter a valid email address.</ion-label>
+    </ion-item>
+
+    <ion-item *ngIf="!isPasswordResetPage">
+        <ion-label position="stacked">Password</ion-label>
+        <ion-input [(ngModel)]="person.password" formControlName="password" type="password" placeholder="Your password" [class.invalid]="!authForm.controls['password'].valid&& authForm.controls['password'].touched">
+        </ion-input>
+    </ion-item>
+
+    <!-- <ion-item>
+        <ion-label position="stacked">Confrm Password</ion-label>
+        <ion-input type="password" placeholder="Your password" [class.invalid]="!authForm.controls['password'].valid&& authForm.controls['password'].touched">
+        </ion-input>
+    </ion-item> -->
+
+    <ion-item>
+        <ion-label position="floating">ชื่อ</ion-label>
+        <ion-input type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="person.name" name="name"></ion-input>
+    </ion-item>
+
+    <ion-item>
+        <ion-label position="floating">โทรศัพท์</ion-label>
+        <ion-input [ngModelOptions]="{standalone: true}" type="text" [(ngModel)]="person.tel" name="tel"></ion-input>
+    </ion-item>
+
+    <ion-item>
+        <ion-label position="floating">อายุ</ion-label>
+        <ion-input [ngModelOptions]="{standalone: true}" [(ngModel)]="person.age" name="age"></ion-input>
+    </ion-item>
+
+    <ion-item>
+        <ion-label>เพศ</ion-label>
+        <ion-select [ngModelOptions]="{standalone: true}" placeholder="เลือกเพศ" [(ngModel)]="person.sex" name="sex">
+            <ion-select-option value="ชาย">ชาย</ion-select-option>
+            <ion-select-option value="หญิง">หญิง</ion-select-option>
+        </ion-select>
+    </ion-item>
+
+    <ion-item>
+        <ion-label>Lifestyle</ion-label>
+        <ion-select placeholder="เลือก" [ngModelOptions]="{standalone: true}" multiple="true" color="success" [(ngModel)]="person.lifestyle" name="lifestyle">
+            <ion-select-option value="food">อาหาร</ion-select-option>
+            <ion-select-option value="sport">กีฬา</ion-select-option>
+            <ion-select-option value="media">บันเทิง</ion-select-option>
+            <ion-select-option value="edu">การศึกษา</ion-select-option>
+            <ion-select-option value="valun">กิจกรรม</ion-select-option>
+        </ion-select>
+    </ion-item>
+
+    <ion-item>
+        <ion-label>การศึกษา</ion-label>
+        <ion-select placeholder="เลือก" [ngModelOptions]="{standalone: true}" [(ngModel)]="person.educational" name="educational">
+            <ion-select-option value="กำลังศึกษา">กำลังศึกษา</ion-select-option>
+            <ion-select-option value="จบการศึกษา">จบการศึกษา</ion-select-option>
+        </ion-select>
+    </ion-item>
+
+    <ion-item>
+        <ion-label>คณะ</ion-label>
+        <ion-select placeholder="เลือก" [ngModelOptions]="{standalone: true}" [(ngModel)]="person.faculty" name="faculty">
+            <ion-select-option value="วิทยาศาสตร์">วิทยาศาสตร์</ion-select-option>
+            <ion-select-option value="BU">บริหาร</ion-select-option>
+            <ion-select-option value="POL">รัฐศาสตร์</ion-select-option>
+            <ion-select-option value="LAW">นิติศาสตร์</ion-select-option>
+            <ion-select-option value="AG">เกษตรศาสตร์</ion-select-option>
+            <ion-select-option value="EN">วิศวกรรมศาสตร์</ion-select-option>
+            <ion-select-option value="MD">วิทยาลัยแพทยศาสตร์และการสาธารณสุข</ion-select-option>
+            <ion-select-option value="NU">พยาบาลศาสตร์</ion-select-option>
+            <ion-select-option value="AR">ศิลปประยุกต์และสถาปัตยกรรมศาสตร์</ion-select-option>
+            <ion-select-option value="LA">ศิลปศาสตร์</ion-select-option>
+            <ion-select-option value="ME">เภสัชศาสตร์</ion-select-option>
+        </ion-select>
+    </ion-item>
+
+    <ion-item>
+        <ion-label>ชั้นปี</ion-label>
+        <ion-select placeholder="เลือก" [ngModelOptions]="{standalone: true}" [(ngModel)]="person.year" name="year">
+            <ion-select-option value="1">1</ion-select-option>
+            <ion-select-option value="2">2</ion-select-option>
+            <ion-select-option value="3">3</ion-select-option>
+            <ion-select-option value="4">4</ion-select-option>
+            <ion-select-option value="5">5</ion-select-option>
+            <ion-select-option value="6">6</ion-select-option>
+            <ion-select-option value="7">7</ion-select-option>
+            <ion-select-option value="8">8</ion-select-option>
+            <ion-select-option value="จบการศึกษา">จบการศึกษา</ion-select-option>
+        </ion-select>
+    </ion-item>
+
+    <ion-item>
+        <ion-label position="floating">Facebook</ion-label>
+        <ion-input [ngModelOptions]="{standalone: true}" type="text" [(ngModel)]="person.facebook" name="facebook"></ion-input>
+    </ion-item>
+
+    <ion-item>
+        <ion-label position="floating">Instagram</ion-label>
+        <ion-input [ngModelOptions]="{standalone: true}" type="text" [(ngModel)]="person.instagram" name="instagram"></ion-input>
+    </ion-item>
+
+    <ion-item>
+        <ion-label position="floating">อื่นๆ</ion-label>
+        <ion-input [ngModelOptions]="{standalone: true}" type="text" [(ngModel)]="person.other" name="other"></ion-input>
+    </ion-item>
+
+
+    <ion-item class="error-message" *ngIf="!authForm.controls['password'].valid
+    && authForm.controls['password'].touched && !isPasswordResetPage">
+        <ion-label>Your password needs more than 6 characters.</ion-label>
+    </ion-item>
+
+    <ion-button color="warning" (click)="submitCredentials(authForm)" expand="block" [disabled]="!authForm.valid">
+        {{ actionButtonText }}
+    </ion-button>
+</form>

@@ -1,0 +1,86 @@
+<ion-header>
+    <ion-toolbar color="dark">
+        <ion-row>
+            <ion-buttons>
+                <ion-back-button color="warning" defaultHref="/home"></ion-back-button>
+            </ion-buttons>
+            <ion-title color="warning">Your events</ion-title>
+        </ion-row>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content color="dark">
+    <app-accordion-list *ngFor="let technology of technologies" name="{{ technology.name }}" description="{{ technology.description }}" (change)="captureName($event)"></app-accordion-list>
+    <ion-item>
+
+        <ion-icon name="fast-food-outline"></ion-icon>
+        &nbsp;&nbsp;&nbsp;
+        <ion-label>
+            <h2>ร้านลุงตัน</h2>
+            <p>10/12/2020 12:30</p>
+            <p>หาเพื่อนกินข้าว ใครว่างมาเลยครับ</p>
+        </ion-label>
+
+        <div>
+            <ion-badge id="notifications-badge" color="danger">1</ion-badge>
+        </div>
+
+    </ion-item>
+
+    <ion-item>
+        <ion-avatar>
+            <ion-img src="assets/images/thor.jpg"></ion-img>
+        </ion-avatar>
+        &nbsp;&nbsp;&nbsp;
+        <ion-label>
+            <h2>THOR</h2>
+            <p>wants to join your activity.</p>
+            <ion-button color="success">ยอมรับ</ion-button>
+            <ion-button color="danger">ปฏิเสธ</ion-button>
+        </ion-label>
+    </ion-item>
+
+    <ion-card>
+
+        <ion-item color="danger">
+            <ion-avatar>
+                <ion-img src="assets/images/iron.jpg"></ion-img>
+            </ion-avatar>
+            &nbsp;&nbsp;&nbsp;
+            <ion-label>
+                <h2>Ironman</h2>
+                <p>left your event.</p>
+            </ion-label>
+            <div>
+                <p>14:00 น.</p>
+            </div>
+        </ion-item>
+    </ion-card>
+
+
+
+    <!-- <ion-item padding> -->
+    <!-- <app-expandable *ngFor="let technology of technologies" name="{{ technology.name }}" description="{{ technology.description }}" (change)="captureName($event)"></app-expandable> -->
+    <!-- </ion-item> -->
+
+
+    <ion-tabs>
+        <ion-tab-bar slot="bottom">
+            <ion-tab-button href="notifications">
+                <ion-icon name="albums"></ion-icon>
+                All
+            </ion-tab-button>
+
+            <ion-tab-button>
+                <ion-icon name="enter" color="primary"></ion-icon>
+                Your events
+            </ion-tab-button>
+
+            <ion-tab-button href="notirequest">
+                <ion-icon name="notifications"></ion-icon>
+                Your requests
+            </ion-tab-button>
+
+        </ion-tab-bar>
+    </ion-tabs>
+</ion-content>

@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "795503194846",
+    "project_id": "scientific-host-304607",
+    "storage_bucket": "scientific-host-304607.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:795503194846:android:7f1f88c72f50dbda5b484f",
+        "android_client_info": {
+          "package_name": "ubu.friends.zone"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "795503194846-bcdnsqr50ll9ola6adu8ainsofs299nr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ubu.friends.zone",
+            "certificate_hash": "225a7b71f082b3ab7561b7d09c5f6d4d0b90e27c"
+          }
+        },
+        {
+          "client_id": "795503194846-ndbda97997428s33tmgakbti2dkjcb3k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAfkA6V8LF2n0BEOVdwJifBrrmtQky5mds"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "795503194846-ndbda97997428s33tmgakbti2dkjcb3k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

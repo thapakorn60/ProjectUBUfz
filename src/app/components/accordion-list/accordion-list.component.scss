@@ -1,0 +1,44 @@
+h2 {
+    cursor: pointer;
+    position: relative;
+    padding: 1em 0.35em;
+    font-size: 1.35em;
+    font-family: Verdana;
+    border-bottom: 1px solid rgba(210, 210, 210, 1);
+    margin: 0;
+    /* Define the style rules for the 'arrow icons' */
+    span {
+        position: fixed;
+        right: 1em;
+        top: 1.2em;
+        font-size: 0.95em;
+        float: right;
+    }
+}
+
+p {
+    line-height: 1.2em;
+    margin: 0 0 1em 0;
+    font-family: Verdana;
+    font-size: 1rem;
+}
+
+div {
+    position: relative;
+    padding: 2em;
+    background: rgba(230, 230, 230, 1);
+    border-bottom: 1px solid rgba(210, 210, 210, 1);
+    ion-button {
+        position: absolute;
+        bottom: 20px;
+        right: 20px;
+    }
+}
+
+.active {
+    display: block
+}
+
+.inactive {
+    display: none;
+}

@@ -1,0 +1,131 @@
+<ion-header>
+    <ion-toolbar color="dark">
+        <ion-row>
+            <ion-button fill="clear" color="warning" (click)="dismiss()">
+                <ion-icon name="arrow-back-outline"></ion-icon>
+            </ion-button>
+            <ion-title color="warning">ข้อมูลอีเว้นท์</ion-title>
+        </ion-row>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content color="light">
+    <ion-card>
+        <div *ngIf="iduser == userid">
+            <ion-row>
+            <!-- <ion-col></ion-col> -->
+            <ion-col >
+                <ion-button fill="outline" expand="block" size="small" (click)="dismiss()" [routerLink]="['/editpost',postId]">
+                    <ion-icon name="pencil-outline"></ion-icon>
+                    แก้ไขอีเว้นท์
+                </ion-button>
+            </ion-col>
+            <ion-col>
+                <ion-button color="danger" fill="outline" expand="block" size="small" (click)="deletePost(postId)">
+                    <ion-icon name="trash-outline"></ion-icon>
+                    ยกเลิกกิจกรรม
+                </ion-button>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col></ion-col>
+            <ion-col>
+                <ion-button fill="outline" expand="block" size="small" (click)="listJoiner(postId)">
+                    ดูรายชื่อการเข้าร่วม
+                </ion-button>
+            </ion-col>
+        </ion-row>
+        </div>
+        <ion-list>
+            <ion-item>
+                <ion-thumbnail slot="start">
+                    <ion-avatar>
+                        <img *ngIf="img != ''" src={{img}}>
+                        <img *ngIf="img == ''" src="https://oakbusinessconsultant.com/wp-content/uploads/2021/05/503257-200.png">
+                    </ion-avatar>
+                </ion-thumbnail>
+                <ion-label>
+                    <h2>{{name}}</h2>
+                    <p>{{createAt | date:"วันที่ dd/MM/yyy เวลา HH:mm"}}</p>
+                </ion-label>
+            </ion-item>
+            <ion-item>
+                ชื่อกิจกรรม : {{eventname}}
+            </ion-item>
+            <ion-item>
+                ประเภท : {{type}}
+            </ion-item>
+            <ion-item>
+                เนื้อหา : {{description}}
+            </ion-item>
+            <ion-item>
+                สถานที่ : {{place}}
+            </ion-item>
+            <ion-item>
+                <ion-label>
+                    <h2>เริ่ม : {{datetime|date:"dd/MM/yyyy"}}</h2>
+
+                    <p>เวลา {{starttime|date:"HH:mm"}} น. ถึง {{endtime|date:"HH:mm"}} น.</p>
+                </ion-label>
+            </ion-item>
+            <ion-item>
+                <ion-label>
+                    รับ {{amount}} คน <p *ngIf="total > 0">เหลือ {{total}} คน</p><p *ngIf="total <= 0">เต็มแล้ว</p>
+                </ion-label>
+            </ion-item>
+        </ion-list>
+        <ion-footer>
+            <ion-row>
+                <!-- <ion-col class="ion-text-center">
+                    <ion-button expand="block" color="primary">
+                        <ion-icon name="location-outline"></ion-icon>
+                        <ion-label>ดูสถานที่</ion-label>
+                    </ion-button>
+                </ion-col> -->
+                <ion-col>
+                    <ion-button expand="block" color="success" (click)="gotoComment(eventname, dataPost._id, dataPost.userid)">
+                        <ion-icon name="chatbox-ellipses"></ion-icon>
+                        &nbsp;
+                        <ion-label>ดูการพูดคุย</ion-label>
+                    </ion-button>
+                </ion-col>
+            </ion-row>
+            <div *ngIf="join == true">
+                <ion-row *ngFor="let join of thisJoin">
+                    <ion-col>
+                        <ion-button expand="block" (click)="notJoin(dataPost._id,join._id)" color="danger">
+                            <p>ยกเลิกเข้าร่วม</p>
+                        </ion-button>
+                    </ion-col>
+                </ion-row>
+            </div>
+            <!-- <div *ngIf="(join == false && userid != iduser) && (total > 0) "> -->
+            <div *ngIf="(join == false && userid != iduser) && (total > 0) && ( (datetime | date:'dd/MM/yyyy') >= (dateNow | date:'dd/MM/yyyy'))">
+
+                <ion-row>
+                    <ion-col>
+                        <ion-button expand="block" (click)="Join(dataPost._id)">
+                            สนใจเข้าร่วม
+                        </ion-button>
+                    </ion-col>
+                </ion-row>
+            </div>
+
+            <!-- <ion-row>
+                <div *ngIf="join == true">
+                    <ion-col>
+                        <ion-button color="danger" (click)="play()">
+                            <p>ยกเลิกเข้าร่วม</p>
+                        </ion-button>
+                    </ion-col>
+                </div>
+                <div *ngIf="join == false" (click)="pause()">
+                    <ion-button>
+                        ขอเข้าร่วม
+                    </ion-button>
+                </div>
+            </ion-row> -->
+        </ion-footer>
+
+    </ion-card>
+</ion-content>

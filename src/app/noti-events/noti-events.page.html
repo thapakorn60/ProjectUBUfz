@@ -1,0 +1,32 @@
+<ion-header>
+    <ion-toolbar color="dark">
+        <ion-row>
+            <ion-buttons>
+                <ion-back-button color="warning" defaultHref="/home"></ion-back-button>
+            </ion-buttons>
+            <ion-title color="warning">Your events</ion-title>
+        </ion-row>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content color="dark">
+    <app-accordion-list *ngFor="let listPost of myPost" name="{{ listPost.eventname }}" description="{{ listPost.description }}" time="{{listPost.datetime}}" start="{{listPost.starttime}}" end="{{listPost.endtime}}"></app-accordion-list>
+
+    <!-- <ion-card>
+
+        <ion-item color="danger">
+            <ion-avatar>
+                <ion-img src="assets/images/iron.jpg"></ion-img>
+            </ion-avatar>
+            &nbsp;&nbsp;&nbsp;
+            <ion-label>
+                <h2>Ironman</h2>
+                left your event
+                <h2>ไปติวหนัวสือ</h2>
+            </ion-label>
+            <div>
+                <p>14:00 น.</p>
+            </div>
+        </ion-item>
+    </ion-card> -->
+</ion-content>

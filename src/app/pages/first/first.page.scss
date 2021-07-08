@@ -1,0 +1,14 @@
+ion-content.background {
+    --background: url(../first/vi.jpg);
+}
+
+// 0 0/100% 100% no-repeat
+.welcome {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    // align-content: center;
+    // align-self: center;
+    height: 100%;
+    flex-direction: column;
+}

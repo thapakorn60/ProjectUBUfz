@@ -1,0 +1,566 @@
+<!-- <ion-app> -->
+<ion-menu side="start" content-id="main-content" color="dark">
+    <ion-header>
+        <ion-toolbar translucent color="dark">
+            <ion-title color="warning">Menu</ion-title>
+        </ion-toolbar>
+    </ion-header>
+    <ion-content color="dark">
+        <ion-list lines="none">
+            <ion-item>
+                <ion-thumbnail slot="start">
+                    <ion-avatar>
+                        <img *ngIf="img != ''" src={{img}}>
+                        <img *ngIf="img == ''" src="https://oakbusinessconsultant.com/wp-content/uploads/2021/05/503257-200.png">
+                    </ion-avatar>
+                </ion-thumbnail>
+                <ion-label color="dark">
+                    <h1>{{name}}</h1>
+                </ion-label>
+            </ion-item>
+            &nbsp;
+            <!-- <ion-item color="warning">
+                <ion-label>
+                        <p>MENU</p>
+                    </ion-label>
+            </ion-item> -->
+            <ion-item href="appointments" color="dark">
+                <ion-icon name="calendar" slot="start" color="warning"></ion-icon>
+                <ion-label>ตารางนัด</ion-label>
+            </ion-item>
+
+            <ion-item (click)="gotoHistory()" color="dark">
+                <ion-icon name="time" slot="start" color="warning"></ion-icon>
+                <ion-label>ประวัติการเข้าร่วม</ion-label>
+            </ion-item>
+
+            <ion-item (click)="seeMyrequest(iduser)" color="dark">
+                <ion-icon name="arrow-redo-circle" color="warning"></ion-icon>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <ion-label>ดูคำขอของฉัน</ion-label>
+            </ion-item>
+
+            <ion-item (click)="gotoNoti(userId)" color="dark">
+                <ion-icon name="notifications" slot="start" color="warning"></ion-icon>
+                <ion-badge id="notifications-badge" color="danger" *ngIf="total > 0">{{total}}</ion-badge>
+                <ion-label>Notifications</ion-label>
+            </ion-item>
+
+            <ion-item href="my-event" color="dark">
+                <ion-icon name="accessibility" slot="start" color="warning"></ion-icon>
+                <ion-label>My event</ion-label>
+            </ion-item>
+
+            <ion-item (click)='logOut()' color="dark">
+                <ion-icon name="log-out" slot="start" color="warning"></ion-icon>
+                <ion-label>Logout</ion-label>
+            </ion-item>
+
+        </ion-list>
+    </ion-content>
+</ion-menu>
+
+<div class="ion-page" id="main-content">
+    <ion-header>
+        <ion-toolbar color="warning">
+            <ion-row>
+                <ion-col class="ion-align-self-center">
+                    <ion-buttons>
+                        <ion-menu-button></ion-menu-button>
+                    </ion-buttons>
+                </ion-col>
+                <ion-col class="ion-align-self-center">
+                    <ion-button fill="clear" (click)="refresh()" color="dark">
+                        <ion-icon name="refresh"></ion-icon>
+
+                    </ion-button>
+                </ion-col>
+
+                <ion-col class="ion-align-self-center">
+                    <ion-button (click)="gotoNoti(userId)" color="dark" fill="clear" size="large">
+                        <ion-icon expand="block" name="notifications"></ion-icon>
+                        <ion-badge id="notifications-badge" color="danger" *ngIf="total > 0">{{total}}</ion-badge>
+                    </ion-button>
+                </ion-col>
+
+                <ion-col>
+                    <!-- <p>{{userEmail}}</p> -->
+                    <ion-item (click)="gotoProfile()" color="warning">
+                        <ion-avatar >
+                            <!-- <img src="https://i.pinimg.com/originals/7c/c7/a6/7cc7a630624d20f7797cb4c8e93c09c1.png"> -->
+                            <!-- <ion-icon size="large" name="person-circle"></ion-icon> -->
+                            <img src={{img}}>
+                        </ion-avatar>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+
+            <ion-row>
+                <ion-col>
+                    <ion-item color="warning">
+                        <ion-label position="stacked">หมวดหมู่</ion-label>
+                        <ion-select placeholder="เลือก" [(ngModel)]="typecate" value="type.value == 'all'" multiple="true" color="success">
+                            <ion-select-option *ngFor="let item of type" value="{{item.value}}">{{item.display}}</ion-select-option>
+                        </ion-select>
+                    </ion-item>
+                </ion-col>
+
+
+                <ion-col>
+                    <ion-item color="warning">
+                        <ion-label position="stacked">วันที่</ion-label>
+                        <ion-input type="date" [(ngModel)]='datecate' displayFormat="DD/MM/YYYY"></ion-input>
+                    </ion-item>
+                    <!-- <ion-input type="date" [(ngModel)]="Post.datetime" name="datetime" displayFormat="D MMM YYYY H:mm" min="2020" max="2025" value="2005-06-17T11:06Z" placeholder="เลือกเวลา"></ion-input> -->
+                </ion-col>
+
+            </ion-row>
+            <ion-row>
+                <ion-col>
+                    <ion-item color="warning">
+                        <ion-label position="stacked">ตั้งแต่เวลา</ion-label>
+                        <ion-select type="number" [(ngModel)]="timeScate">
+                            <ion-select-option *ngFor="let item of numberTime" value="{{item.value}}">{{item.display}}</ion-select-option>
+                        </ion-select>
+                    </ion-item>
+                </ion-col>
+                <ion-col>
+                    <ion-item color="warning">
+                        <ion-label position="stacked">ถึงเวลา</ion-label>
+                        <ion-select type="number" [(ngModel)]="timeEcate">
+                            <ion-select-option *ngFor="let item of numberTime" value="{{item.value}}">{{item.display}}</ion-select-option>
+                        </ion-select>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+            <!-- </ion-item> -->
+            <ion-row>
+                <ion-col>
+                    <ion-button color="dark" expand="block" href="post">
+                        <ion-icon name="add-circle-outline"></ion-icon>
+                        &nbsp; สร้างอีเว้นท์
+                    </ion-button>
+                </ion-col>
+                <ion-col>
+                    <ion-button fill="solid" expand="block" color="dark" (click)="getFilter()">
+                        <ion-icon name="search"></ion-icon>
+                        &nbsp; search
+                    </ion-button>
+                </ion-col>
+            </ion-row>
+
+        </ion-toolbar>
+    </ion-header>
+
+
+    <ion-content  *ngIf="modeEvent == 'normal'">
+        <ion-refresher slot="fixed" (ionRefresh)="refresh()">
+            <ion-refresher-content></ion-refresher-content>
+        </ion-refresher>
+        <ion-slides [options]="sliderOpts" pager="true" *ngIf="itemIntro.length > 0">
+            <ion-slide *ngFor="let listPost of itemIntro">
+                <ion-card >
+                <div *ngIf="((listPost.datetime | date:'dd/MM/yyyy') > (dateNow | date:'dd/MM/yyyy') || (listPost.datetime | date:'dd/MM/yyyy') == (dateNow | date:'dd/MM/yyyy')
+                    )">
+                    <!-- <div> -->
+                    <ion-header>
+                        <ion-toolbar color="primary" class="small-8 columns ribbon-holder">
+                            <ion-row>
+                                <div class="ribbon">
+                                    <ion-icon name="ribbon"></ion-icon>
+                                    แนะนำ
+                                </div>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <div>
+                                    <ion-title color="dark">
+                                        <ion-label>
+                                            <h2>{{listPost.eventname}}</h2>
+                                        </ion-label>
+                                    </ion-title>
+                                    </div>
+                            </ion-row>
+                            <div slot="end" *ngIf="userId == listPost.userid">
+
+                                <ion-col>
+                                    <ion-label color="warning">
+                                        My Event
+                                    </ion-label>
+                                </ion-col>
+                            </div>
+                        </ion-toolbar>
+
+                    </ion-header>
+
+                    <ion-row>
+                        <ion-col>
+
+                            <ion-item (click)="profileUser(listPost.userid)">
+                                <div *ngFor="let im of imgUser" size="small">
+                                    <ion-avatar size="small" slot="start" *ngIf="im.postId == listPost._id" >
+                                        <img *ngIf="im.img != ''" src={{im.img}}>
+                                        <img *ngIf="im.img == ''" src="https://oakbusinessconsultant.com/wp-content/uploads/2021/05/503257-200.png">
+    
+                                    </ion-avatar>
+                                    </div>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                <ion-label>
+                                    <h2>{{listPost.name}} </h2>
+                                    <p> {{ listPost.createdAt | date: "dd/MM/yyyy HH:mm" }} น.</p>
+                                    <p>ต้องการ {{listPost.amount}} คน</p>
+                                </ion-label>
+                                <div *ngFor="let num of get"> 
+                                    <ion-label *ngIf="listPost._id == num.postId">
+                                        <p *ngIf="num.remain > 0">เหลือ {{num.remain}} คน</p>
+                                        <p *ngIf="num.remain <= 0">เต็มแล้ว</p>
+                                    </ion-label>        
+                                </div>
+                            </ion-item>
+                        </ion-col>
+                        <ion-row>
+
+                        </ion-row>
+                    </ion-row>
+
+                    <ion-card-content>
+                        <ion-row>
+                            <ion-col>
+                                <ion-label>
+                                    เริ่มอีเว้นท์ <ion-text color="success">{{listPost.datetime | date: "dd/MM/yyyy"}}</ion-text> เวลา {{listPost.starttime | date:"HH:mm"}} น. ถึง {{listPost.endtime | date:"HH:mm"}} น.
+                                </ion-label>
+                            </ion-col>
+
+                        </ion-row>
+                        <ion-row>
+                            <ion-col>
+                                <ion-button shape="round" size="small" color="primary" fill="outline" *ngFor="let type of listPost.type">{{type}}</ion-button>
+                            </ion-col>
+                            <ion-col>
+                                <ion-button size="small" expand="block" (click)="seeDetail(listPost._id, listPost.eventname)">
+                                    <div>view</div>
+                                    <ion-icon size="small" name="arrow-forward"></ion-icon>
+                                </ion-button>
+                            </ion-col>
+                        </ion-row>
+                        <ion-row *ngFor="let join of thisJoin">
+                            <div *ngIf="(join.postId == listPost._id && join.joinerId == userId && join.ownerId != userId)">
+                                <ion-col>
+                                        <ion-text>
+                                            <ion-icon name="checkmark-outline"></ion-icon>
+                                            คุณได้ส่งคำขอหรือเข้าร่วมแล้ว
+                                        </ion-text>
+                                    <!-- </ion-button> -->
+                                </ion-col>
+                            </div>
+                        </ion-row>
+                    </ion-card-content>
+                </div>
+            </ion-card>
+        </ion-slide>
+        </ion-slides>
+
+
+        <div *ngFor="let listPost of unique;let i = index">
+         
+            <div *ngIf="((listPost.datetime | date:'dd/MM/yyyy') > (dateNow | date:'dd/MM/yyyy') || (listPost.datetime | date:'dd/MM/yyyy') == (dateNow | date:'dd/MM/yyyy')
+                )">
+                <!-- <div> -->
+                <ion-card>
+                    <ion-header>
+                        <ion-toolbar color="warning">
+                            <ion-row>
+                                <ion-col>
+                                    <ion-title color="dark">
+                                        <ion-label>
+                                            <h2>{{listPost.eventname}}</h2>
+                                        </ion-label>
+                                    </ion-title>
+                                </ion-col>
+                            </ion-row>
+                            <div slot="end" *ngIf="userId == listPost.userid">
+                                <ion-col>
+                                    <ion-label color="primary">
+                                        My Event
+                                    </ion-label>
+                                </ion-col>
+                            </div>
+                        </ion-toolbar>
+
+                    </ion-header>
+
+                    <ion-row>
+                        <ion-col>
+
+                            <ion-item (click)="profileUser(listPost.userid)">
+                                <div *ngFor="let im of imgUser">
+                                <ion-avatar size="small" slot="start" *ngIf="im.postId == listPost._id" >
+                                    <!-- <ion-icon size="large" name="person-circle"></ion-icon> -->
+                                    <img *ngIf="im.img != ''" src={{im.img}}>
+                                    <img *ngIf="im.img == ''" src="https://oakbusinessconsultant.com/wp-content/uploads/2021/05/503257-200.png">
+
+                                </ion-avatar>
+                                </div>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                <ion-label>
+                                    <ion-row>
+                                        <h2>
+                                            {{listPost.name}}
+                                        </h2>
+                                    </ion-row>
+                                    <p> {{ listPost.createdAt | date: "dd/MM/yyyy HH:mm" }} น.</p>
+
+                                    <p >ต้องการ {{listPost.amount}} คน</p>
+
+                                </ion-label>
+                                <div *ngFor="let num of get"> 
+                                    <ion-label *ngIf="listPost._id == num.postId">
+                                        <p *ngIf="num.remain > 0">เหลือ {{num.remain}} คน</p>
+                                        <p *ngIf="num.remain <= 0">เต็มแล้ว</p>
+                                    </ion-label>        
+                                </div>
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
+                    
+                    <ion-card-content>
+
+                        <ion-row>
+                            <ion-col>
+                                <ion-label>
+                                    เริ่มอีเว้นท์ <ion-text color="success">{{listPost.datetime | date: "dd/MM/yyyy"}}</ion-text> เวลา {{listPost.starttime | date:"HH:mm"}} น. ถึง {{listPost.endtime | date:"HH:mm"}} น.
+                                </ion-label>
+                            </ion-col>
+
+                        </ion-row>
+                        <ion-row>
+                            <ion-col>
+                                <ion-button shape="round" size="small" color="primary" fill="outline" *ngFor="let type of listPost.type">{{type}}</ion-button>
+                            </ion-col>
+                            <ion-col>
+                                <ion-button size="small" expand="block" (click)="seeDetail(listPost._id, listPost.eventname)">
+                                    <div>view</div>
+                                    <ion-icon size="small" name="arrow-forward"></ion-icon>
+                                </ion-button>
+                            </ion-col>
+                        </ion-row>
+                        <ion-row *ngFor="let join of thisJoin">
+                            <div *ngIf="(join.postId == listPost._id && join.joinerId == userId && join.ownerId != userId)">
+                                <ion-col>
+                                        <ion-text>
+                                            <ion-icon name="checkmark-outline"></ion-icon>
+                                            คุณได้ส่งคำขอหรือเข้าร่วมแล้ว
+                                        </ion-text>
+                                </ion-col>
+                            </div>
+                        </ion-row>
+                    </ion-card-content>
+                </ion-card>
+            </div>
+        </div>
+    </ion-content>
+    <!-- ------------------------------------------------------------------------------------------------------------- -->
+    <ion-content  *ngIf="modeEvent == 'cate'">
+        <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+            <ion-refresher-content></ion-refresher-content>
+        </ion-refresher>
+        <ion-slides [options]="sliderOpts" pager="true" *ngIf="itemIntro.length > 0">
+            <ion-slide *ngFor="let listPost of itemIntro">
+                <ion-card >
+                <div *ngIf="((listPost.datetime | date:'dd/MM/yyyy') > (dateNow | date:'dd/MM/yyyy') || (listPost.datetime | date:'dd/MM/yyyy') == (dateNow | date:'dd/MM/yyyy')
+                    )">
+                    <!-- <div> -->
+                    <ion-header>
+                        <ion-toolbar color="primary" class="small-8 columns ribbon-holder">
+                            <ion-row>
+                                <div class="ribbon">
+                                    <ion-icon name="ribbon"></ion-icon>
+                                    แนะนำ
+                                </div>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <div>
+                                    <ion-title color="dark">
+                                        <ion-label>
+                                            <h2>{{listPost.eventname}}</h2>
+                                        </ion-label>
+                                    </ion-title>
+                                    </div>
+                            </ion-row>
+                            <div slot="end" *ngIf="userId == listPost.userid">
+
+                                <ion-col>
+                                    <ion-label color="warning">
+                                        My Event
+                                    </ion-label>
+                                </ion-col>
+                            </div>
+                        </ion-toolbar>
+
+                    </ion-header>
+
+                    <ion-row>
+                        <ion-col>
+
+                            <ion-item (click)="profileUser(listPost.userid)">
+                                <div *ngFor="let im of imgUser" size="small">
+                                    <ion-avatar size="small" slot="start" *ngIf="im.postId == listPost._id" >
+                                        <img *ngIf="im.img != ''" src={{im.img}}>
+                                        <img *ngIf="im.img == ''" src="https://oakbusinessconsultant.com/wp-content/uploads/2021/05/503257-200.png">
+    
+                                    </ion-avatar>
+                                    </div>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                <ion-label>
+                                    <h2>{{listPost.name}} </h2>
+                                    <p> {{ listPost.createdAt | date: "dd/MM/yyyy HH:mm" }} น.</p>
+                                    <p>ต้องการ {{listPost.amount}} คน</p>
+                                </ion-label>
+                                <div *ngFor="let num of get"> 
+                                    <ion-label *ngIf="listPost._id == num.postId">
+                                        <p *ngIf="num.remain > 0">เหลือ {{num.remain}} คน</p>
+                                        <p *ngIf="num.remain <= 0">เต็มแล้ว</p>
+                                    </ion-label>        
+                                </div>
+                            </ion-item>
+                        </ion-col>
+                        <ion-row>
+
+                        </ion-row>
+                    </ion-row>
+
+                    <ion-card-content>
+                        <ion-row>
+                            <ion-col>
+                                <ion-label>
+                                    เริ่มอีเว้นท์ <ion-text color="success">{{listPost.datetime | date: "dd/MM/yyyy"}}</ion-text> เวลา {{listPost.starttime | date:"HH:mm"}} น. ถึง {{listPost.endtime | date:"HH:mm"}} น.
+                                </ion-label>
+                            </ion-col>
+
+                        </ion-row>
+                        <ion-row>
+                            <ion-col>
+                                <ion-button shape="round" size="small" color="primary" fill="outline" *ngFor="let type of listPost.type">{{type}}</ion-button>
+                            </ion-col>
+                            <ion-col>
+                                <ion-button size="small" expand="block" (click)="seeDetail(listPost._id, listPost.eventname)">
+                                    <div>view</div>
+                                    <ion-icon size="small" name="arrow-forward"></ion-icon>
+                                </ion-button>
+                            </ion-col>
+                        </ion-row>
+                        <ion-row *ngFor="let join of thisJoin">
+                            <div *ngIf="(join.postId == listPost._id && join.joinerId == userId && join.ownerId != userId)">
+                                <ion-col>
+                                        <ion-text>
+                                            <ion-icon name="checkmark-outline"></ion-icon>
+                                            คุณได้ส่งคำขอหรือเข้าร่วมแล้ว
+                                        </ion-text>
+                                    <!-- </ion-button> -->
+                                </ion-col>
+                            </div>
+                        </ion-row>
+                    </ion-card-content>
+                </div>
+            </ion-card>
+        </ion-slide>
+        </ion-slides>
+
+        <div *ngFor="let listPost of unique;let i = index">
+         
+            <div *ngIf="((listPost.datetime | date:'dd/MM/yyyy') > (dateNow | date:'dd/MM/yyyy') || (listPost.datetime | date:'dd/MM/yyyy') == (dateNow | date:'dd/MM/yyyy')
+                )">
+                <!-- <div> -->
+                <ion-card>
+                    <ion-header>
+                        <ion-toolbar color="warning">
+                            <ion-row>
+                                <ion-col>
+                                    <ion-title color="dark">
+                                        <ion-label>
+                                            <h2>{{listPost.eventname}}</h2>
+                                        </ion-label>
+                                    </ion-title>
+                                </ion-col>
+                            </ion-row>
+                            <div slot="end" *ngIf="userId == listPost.userid">
+                                <ion-col>
+                                    <ion-label color="primary">
+                                        My Event
+                                    </ion-label>
+                                </ion-col>
+                            </div>
+                        </ion-toolbar>
+
+                    </ion-header>
+
+                    <ion-row>
+                        <ion-col>
+
+                            <ion-item (click)="profileUser(listPost.userid)">
+                                <div *ngFor="let im of imgUser">
+                                <ion-avatar size="small" slot="start" *ngIf="im.postId == listPost._id" >
+                                    <!-- <ion-icon size="large" name="person-circle"></ion-icon> -->
+                                    <img *ngIf="im.img != ''" src={{im.img}}>
+                                    <img *ngIf="im.img == ''" src="https://oakbusinessconsultant.com/wp-content/uploads/2021/05/503257-200.png">
+
+                                </ion-avatar>
+                                </div>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                <ion-label>
+                                    <ion-row>
+                                        <h2>
+                                            {{listPost.name}}
+                                        </h2>
+                                    </ion-row>
+                                    <p> {{ listPost.createdAt | date: "dd/MM/yyyy HH:mm" }} น.</p>
+
+                                    <p >ต้องการ {{listPost.amount}} คน</p>
+
+                                </ion-label>
+                                <div *ngFor="let num of get"> 
+                                    <ion-label *ngIf="listPost._id == num.postId">
+                                        <p *ngIf="num.remain > 0">เหลือ {{num.remain}} คน</p>
+                                        <p *ngIf="num.remain <= 0">เต็มแล้ว</p>
+                                    </ion-label>        
+                                </div>
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
+                    
+                    <ion-card-content>
+
+                        <ion-row>
+                            <ion-col>
+                                <ion-label>
+                                    เริ่มอีเว้นท์ <ion-text color="success">{{listPost.datetime | date: "dd/MM/yyyy"}}</ion-text> เวลา {{listPost.starttime | date:"HH:mm"}} น. ถึง {{listPost.endtime | date:"HH:mm"}} น.
+                                </ion-label>
+                            </ion-col>
+
+                        </ion-row>
+                        <ion-row>
+                            <ion-col>
+                                <ion-button shape="round" size="small" color="primary" fill="outline" *ngFor="let type of listPost.type">{{type}}</ion-button>
+                            </ion-col>
+                            <ion-col>
+                                <ion-button size="small" expand="block" (click)="seeDetail(listPost._id, listPost.eventname)">
+                                    <div>view</div>
+                                    <ion-icon size="small" name="arrow-forward"></ion-icon>
+                                </ion-button>
+                            </ion-col>
+                        </ion-row>
+                        <ion-row *ngFor="let join of thisJoin">
+                            <div *ngIf="(join.postId == listPost._id && join.joinerId == userId && join.ownerId != userId)">
+                                <ion-col>
+                                        <ion-text>
+                                            <ion-icon name="checkmark-outline"></ion-icon>
+                                            คุณได้ส่งคำขอหรือเข้าร่วมแล้ว
+                                        </ion-text>
+                                </ion-col>
+                            </div>
+                        </ion-row>
+                    </ion-card-content>
+                </ion-card>
+            </div>
+        </div>
+
+    </ion-content>
+</div>
+<!-- </ion-app> -->

@@ -1,0 +1,65 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-row>
+            <ion-buttons>
+                <ion-back-button color="warning" defaultHref="/home"></ion-back-button>
+            </ion-buttons>
+            <ion-title color="warning">Your request</ion-title>
+        </ion-row>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content color="dark">
+    <ion-card>
+        <ion-item>
+            <ion-avatar>
+                <ion-img src="assets/images/iron.jpg"></ion-img>
+            </ion-avatar>
+            &nbsp;&nbsp;&nbsp;
+            <ion-label>
+                <h2>Ironman</h2>
+                <p>confirmed your request.</p>
+            </ion-label>
+            <div>
+                <p>14:00 น.</p>
+            </div>
+        </ion-item>
+    </ion-card>
+    <ion-card>
+
+        <ion-item>
+            <ion-avatar>
+                <ion-img src="assets/images/thanos.jfif"></ion-img>
+            </ion-avatar>
+            &nbsp;&nbsp;&nbsp;
+            <ion-label>
+                <h2>Thanos</h2>
+                <p>confirmed your request.</p>
+            </ion-label>
+            <div>
+                <p>11:00 น.</p>
+            </div>
+        </ion-item>
+    </ion-card>
+
+
+    <ion-tabs>
+        <ion-tab-bar slot="bottom">
+            <ion-tab-button href="notifications">
+                <ion-icon name="albums"></ion-icon>
+                All
+            </ion-tab-button>
+
+            <ion-tab-button href="notievents">
+                <ion-icon name="enter"></ion-icon>
+                Your events
+            </ion-tab-button>
+
+            <ion-tab-button>
+                <ion-icon name="notifications" color="primary"></ion-icon>
+                Your requests
+            </ion-tab-button>
+
+        </ion-tab-bar>
+    </ion-tabs>
+</ion-content>

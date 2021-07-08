@@ -1,0 +1,289 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-row>
+            <ion-button fill="clear" (click)="dismiss()">
+                <ion-icon color="warning" name="arrow-back-outline"></ion-icon>
+            </ion-button>
+            <ion-title color="warning">Notifications</ion-title>
+        </ion-row>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content color="dark">
+
+    <div *ngFor="let noti of allNoti">
+        <ion-card *ngIf="noti.press == 'accept' && noti.joinerId == iduser">
+            <ion-row>
+                <ion-button fill="clear" size="small">
+                    <p>{{noti.createdAt | date: "dd/MM/yyyy HH:mm"}} น.</p>
+                </ion-button>
+
+                <ion-button size="small" color="danger" fill="clear" (click)="delete(noti._id)">
+                    <ion-icon name="trash"></ion-icon>
+                </ion-button>
+
+                <ion-button fill="outline" size="small" (click)="markRead(noti._id)" *ngIf="noti.read === false">
+                    mark read
+                </ion-button>
+                <ion-button size="small" fill="clear" *ngIf="noti.read === true">
+                    <ion-icon name="checkmark-outline"></ion-icon>read
+                </ion-button>
+
+
+
+            </ion-row>
+            <ion-item>
+                &nbsp;&nbsp;&nbsp;
+                    <div>
+                        <ion-row>
+                            <ion-item>
+                            <ion-thumbnail>
+                            <ion-avatar>
+                                <ion-icon size="large" color="success" name="checkmark-circle"></ion-icon>
+                            </ion-avatar>
+                            </ion-thumbnail>
+                            <!-- <ion-col> -->
+                                <ion-label>
+                                    <h2>อีเว้นท์ : {{noti.postName}}</h2>
+                                    <p>by {{noti.ownerName}}</p>
+                                    <p><ion-text color="success">{{noti.ownerName}} {{noti.description}}</ion-text></p>    
+                                </ion-label>
+                            <!-- </ion-col>
+                            <ion-col> -->
+                                <!-- <ion-label >
+                                    <p color="success">{{noti.ownerName}} {{noti.description}}</p>
+                                </ion-label> -->
+                            <!-- </ion-col> -->
+                        </ion-item>
+                        </ion-row>
+                    </div>
+            </ion-item>
+        </ion-card>
+                <!-- ================================================================================ -->
+        <ion-card *ngIf="noti.press == 'out' && noti.ownerId == iduser">
+            <ion-row>
+                <ion-button fill="clear" size="small">
+                    <p>{{noti.createdAt | date: "dd/MM/yyyy HH:mm"}} น.</p>
+                </ion-button>
+                <ion-button size="small" color="danger" fill="clear" (click)="delete(noti._id)">
+                    <ion-icon name="trash"></ion-icon>
+                </ion-button>
+                <ion-button fill="outline" size="small" (click)="markRead(noti._id)" *ngIf="noti.read === false">
+                    mark read
+                </ion-button>
+                <ion-button  size="small" fill="clear" *ngIf="noti.read === true">
+                    <ion-icon name="checkmark-outline"></ion-icon>read
+                </ion-button>
+
+            </ion-row>
+            <ion-item>
+                &nbsp;&nbsp;&nbsp;                    
+                     <div>
+                        <ion-row>
+                            <ion-item>
+                                <ion-thumbnail>
+                                <ion-avatar>
+                                    <ion-icon size="large" color="danger" name="exit"></ion-icon>
+                                </ion-avatar>
+                                </ion-thumbnail>
+                                <!-- <ion-col> -->
+                                    <ion-label>
+                                        <h2>อีเว้นท์ : {{noti.postName}}</h2>
+                                        <p>by {{noti.ownerName}}</p>
+                                        <p><ion-text color="danger"> {{noti.joinerName}} {{noti.description}}</ion-text></p>    
+                                    </ion-label>
+                                <!-- </ion-col>
+                                <ion-col> -->
+                                    <!-- <ion-label >
+                                        <p color="success">{{noti.ownerName}} {{noti.description}}</p>
+                                    </ion-label> -->
+                                <!-- </ion-col> -->
+                            </ion-item>
+                        </ion-row>
+                    </div>
+            </ion-item>
+        </ion-card>
+                <!-- ================================================================================ -->
+        <ion-card *ngIf="noti.press == 'kick' && noti.joinerId == iduser">
+            <ion-row>
+                <ion-button fill="clear" size="small">
+                    <p>{{noti.createdAt | date: "dd/MM/yyyy HH:mm"}} น.</p>
+                </ion-button>
+                <ion-button size="small" color="danger" fill="clear" (click)="delete(noti._id)">
+                    <ion-icon name="trash"></ion-icon>
+                </ion-button>
+                <ion-button fill="outline" size="small" (click)="markRead(noti._id)" *ngIf="noti.read === false">
+                    mark read
+                </ion-button>
+                <ion-button  size="small" fill="clear" *ngIf="noti.read === true">
+                    <ion-icon name="checkmark-outline"></ion-icon>read
+                </ion-button>
+
+            </ion-row>
+            <ion-item>
+                &nbsp;&nbsp;&nbsp;
+                    <div>
+                        <ion-row>
+                            <ion-item>
+                            <ion-thumbnail>
+                            <ion-avatar>
+                                <ion-icon size="large" color="danger" name="exit"></ion-icon>
+                            </ion-avatar>
+                            </ion-thumbnail>
+                            <!-- <ion-col> -->
+                                <ion-label>
+                                    <h2>อีเว้นท์ : {{noti.postName}}</h2>
+                                    <p>by {{noti.ownerName}}</p>
+                                    <p><ion-text color="danger"> {{noti.description}} โดย {{noti.ownerName}}</ion-text></p>    
+                                </ion-label>
+                            <!-- </ion-col>
+                            <ion-col> -->
+                                <!-- <ion-label >
+                                    <p color="success">{{noti.ownerName}} {{noti.description}}</p>
+                                </ion-label> -->
+                            <!-- </ion-col> -->
+                        </ion-item>
+                        </ion-row>
+                    </div>
+            </ion-item>
+        </ion-card>
+                <!-- ================================================================================ -->
+        <ion-card *ngIf="noti.press == 'reject' && noti.joinerId == iduser">
+            <ion-row>
+                <ion-button fill="clear" size="small">
+                    <p>{{noti.createdAt | date: "dd/MM/yyyy HH:mm"}} น.</p>
+                </ion-button>
+                <ion-button size="small" color="danger" fill="clear" (click)="delete(noti._id)">
+                    <ion-icon name="trash"></ion-icon>
+                </ion-button>
+                <ion-button fill="outline" size="small" (click)="markRead(noti._id)" *ngIf="noti.read === false">
+                    mark read
+                </ion-button>
+                <ion-button  size="small" fill="clear" *ngIf="noti.read === true">
+                    <ion-icon name="checkmark-outline"></ion-icon>read
+                </ion-button>
+
+            </ion-row>
+            <ion-item>
+                &nbsp;&nbsp;&nbsp;
+                    <div>
+                        <ion-row>
+                            <ion-item>
+                            <ion-thumbnail>
+                            <ion-avatar>
+                                <ion-icon size="large" color="danger" name="close-circle">></ion-icon>
+                            </ion-avatar>
+                            </ion-thumbnail>
+                            <!-- <ion-col> -->
+                                <ion-label>
+                                    <h2>อีเว้นท์ : {{noti.postName}}</h2>
+                                    <p>by {{noti.ownerName}}</p>
+                                    <p><ion-text color="danger"> {{noti.description}} by {{noti.ownerName}}</ion-text></p>    
+                                </ion-label>
+                            <!-- </ion-col>
+                            <ion-col> -->
+                                <!-- <ion-label >
+                                    <p color="success">{{noti.ownerName}} {{noti.description}}</p>
+                                </ion-label> -->
+                            <!-- </ion-col> -->
+                        </ion-item>
+                        </ion-row>
+                    </div>
+            </ion-item>
+        </ion-card>
+                <!-- ================================================================================ -->
+        <ion-card *ngIf="noti.press == 'request' && noti.ownerId == iduser">
+            <ion-row>
+                <ion-button fill="clear" size="small">
+                    <p>{{noti.createdAt | date: "dd/MM/yyyy HH:mm"}} น.</p>
+                </ion-button> 
+
+                <ion-button size="small" color="danger" fill="clear" (click)="delete(noti._id)">
+                    <ion-icon name="trash"></ion-icon>
+                </ion-button>
+
+                <ion-button fill="outline" size="small" (click)="markRead(noti._id)" *ngIf="noti.read === false">
+                    mark read
+                </ion-button>
+
+                <ion-button size="small" fill="clear" *ngIf="noti.read === true">
+                    <ion-icon name="checkmark-outline"></ion-icon>read
+                </ion-button>
+
+            </ion-row>
+            <ion-item>
+                &nbsp;&nbsp;&nbsp;
+                    <div>
+                        <ion-row>
+                            <ion-item>
+                            <ion-thumbnail>
+                            <ion-avatar>
+                                <ion-icon size="large" color="primary" name="log-in"></ion-icon>
+                            </ion-avatar>
+                            </ion-thumbnail>
+                            <!-- <ion-col> -->
+                                <ion-label>
+                                    <h2>อีเว้นท์ : {{noti.postName}}</h2>
+                                    <p>by {{noti.ownerName}}</p>
+                                    <p><ion-text color="primary">{{noti.joinerName}} {{noti.description}}</ion-text></p>    
+                                </ion-label>
+                            <!-- </ion-col>
+                            <ion-col> -->
+                                <!-- <ion-label >
+                                    <p color="success">{{noti.ownerName}} {{noti.description}}</p>
+                                </ion-label> -->
+                            <!-- </ion-col> -->
+                        </ion-item>
+                        </ion-row>
+                    </div>
+            </ion-item>
+        </ion-card>
+                <!-- ================================================================================ -->
+        <ion-card *ngIf="noti.press == 'delete' && noti.joinerId == iduser">
+                    <ion-row>
+                        <ion-button fill="clear" size="small">
+                            <p>{{noti.createdAt | date: "dd/MM/yyyy HH:mm"}} น.</p>
+                        </ion-button>
+                        <ion-button size="small" color="danger" fill="clear" (click)="delete(noti._id)">
+                            <ion-icon name="trash"></ion-icon>
+                        </ion-button>
+                        <ion-button fill="outline" size="small" (click)="markRead(noti._id)" *ngIf="noti.read === false">
+                            mark read
+                        </ion-button>
+                        <ion-button  size="small" fill="clear" *ngIf="noti.read === true">
+                            <ion-icon name="checkmark-outline"></ion-icon>read
+                        </ion-button>
+        
+                    </ion-row>
+                    <ion-item>
+                        &nbsp;&nbsp;&nbsp;
+                            <div>
+                                <ion-row>
+                                    <ion-item>
+                                    <ion-thumbnail>
+                                    <ion-avatar>
+                                        <ion-icon size="large" color="danger" name="backspace"></ion-icon>
+                                    </ion-avatar>
+                                    </ion-thumbnail>
+                                    <!-- <ion-col> -->
+                                        <ion-label>
+                                            <h2>อีเว้นท์ : {{noti.postName}}</h2>
+                                            <p>by {{noti.ownerName}}</p>
+                                            <p><ion-text color="danger"> {{noti.description}}</ion-text></p>    
+                                        </ion-label>
+                                    <!-- </ion-col>
+                                    <ion-col> -->
+                                        <!-- <ion-label >
+                                            <p color="success">{{noti.ownerName}} {{noti.description}}</p>
+                                        </ion-label> -->
+                                    <!-- </ion-col> -->
+                                </ion-item>
+                                </ion-row>
+                            </div>
+                    </ion-item>
+        </ion-card>
+    </div>
+
+
+
+</ion-content>

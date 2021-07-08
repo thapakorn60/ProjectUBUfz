@@ -1,0 +1,29 @@
+<ion-header>
+    <ion-toolbar color="dark">
+        <ion-row>
+            <ion-button color="warning" fill="clear" (click)="dismiss()">
+                <ion-icon name="arrow-back-outline"></ion-icon>
+            </ion-button>
+            <ion-title color="warning">Myrequest</ion-title>
+        </ion-row>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content color="dark">
+    <ion-card *ngFor="let data of myJoin">
+        <ion-item>
+            <ion-label>
+                <h2>{{data.postName}}</h2>
+                <h4>by {{data.ownerName}}</h4>
+                <h4>ขอเมื่อ {{data.createdAt | date:"dd/MM/yyyy HH:mm น."}}</h4>
+            </ion-label>
+
+            <div>
+                <ion-button color="danger" fill="outline" (click)="cancel(data._id)">
+                    ยกเลิกคำขอ
+                </ion-button>
+            </div>
+        </ion-item>
+    </ion-card>
+
+</ion-content>

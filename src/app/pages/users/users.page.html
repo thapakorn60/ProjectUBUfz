@@ -1,0 +1,23 @@
+<ion-header>
+    <ion-toolbar color="dark">
+        <ion-title color="warning">users</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content color="dark">
+    <ion-card *ngFor="let user of allUser">
+        <ion-card-header>
+            <ion-card-title>{{user.name}}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+            <div>
+                <p>อายุ:{{user.age}} เพศ:{{user.sex}} การศึกษา:{{user.educational}}</p>
+                <p>email:{{user.email}} facebook:{{user.facebook}}</p>
+                <p>คณะ {{user.faculty}}</p>
+                <p>tel {{user.tel}}</p>
+            </div>
+            <ion-button color="danger" (click)="deleteUser()">Delete this user</ion-button>
+        </ion-card-content>
+    </ion-card>
+
+</ion-content>

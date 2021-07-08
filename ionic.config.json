@@ -1,0 +1,7 @@
+{
+  "name": "UBUfriendzone",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

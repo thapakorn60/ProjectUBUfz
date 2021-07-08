@@ -1,0 +1,52 @@
+<ion-header>
+    <ion-toolbar color="dark">
+        <ion-row>
+            <ion-buttons>
+                <ion-back-button color="warning" defaultHref="/home"></ion-back-button>
+            </ion-buttons>
+            <ion-title color="warning">MyEvent</ion-title>
+        </ion-row>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content color="dark">
+    <ion-card *ngFor="let post of myPost">
+        <div *ngIf="((post.datetime | date:'dd/MM/yyyy') > (dateNow | date:'dd/MM/yyyy') || (post.datetime | date:'dd/MM/yyyy') == (dateNow | date:'dd/MM/yyyy')
+            )">
+        <ion-card-header color="warning">
+            <ion-card-title>{{ post.eventname }}</ion-card-title>
+            <!-- <ion-card-title>Card Title</ion-card-title> -->
+        </ion-card-header>
+
+        <ion-card-content>
+            &nbsp;
+            <ion-row>
+                <ion-col>
+                    <h2>{{ post.description }}</h2>
+                </ion-col>
+                <!-- <ion-col *ngFor="let re of thisJoinR"> -->
+                <!-- คำขอ {{re.postId}} ยอมรับแล้ว -->
+                <!-- <button ion-button round color="secondary" (click)="presentModal()">show joiner</button> -->
+                <!-- </ion-col> -->
+            </ion-row>
+        </ion-card-content>
+        <ion-footer>
+            <ion-row>
+                <ion-col>
+                    <ion-button size="small" expand="block" (click)="seeDetail(post._id)">
+                        <div>view</div>
+                        <ion-icon size="small" name="arrow-forward"></ion-icon>
+                    </ion-button>
+                </ion-col>
+                <ion-col>
+                    <ion-button size="small" fill="outline" color="warning" (click)="listJoiner(post._id)">
+                        <ion-icon name="people"></ion-icon>&nbsp;
+                        <p>show joiner</p>&nbsp;
+                        <ion-icon name="arrow-forward"></ion-icon>
+                    </ion-button>
+                </ion-col>
+            </ion-row>
+        </ion-footer>
+        </div>
+    </ion-card>
+</ion-content>

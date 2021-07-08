@@ -1,0 +1,74 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-row>
+            <ion-button size="small" fill="clear" color="warning" (click)="dismiss()">
+                <ion-icon size="small" name="arrow-back-outline"></ion-icon>
+            </ion-button>
+
+            <ion-title color="warning">{{name}}</ion-title>
+        </ion-row>
+    </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+
+    <ion-item>
+        <!-- <ion-thumbnail slot="start" > -->
+            <ion-avatar size="small">
+                <img *ngIf="img != ''" src={{img}}>
+                <img *ngIf="img == ''" src="https://oakbusinessconsultant.com/wp-content/uploads/2021/05/503257-200.png">
+            </ion-avatar>
+        <!-- </ion-thumbnail> -->
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <ion-label color="warning">
+            <h1>{{name}}</h1>
+            <h2>อายุ: {{age}}</h2>
+            <h2>เพศ: {{sex}}</h2>
+        </ion-label>
+    </ion-item>
+
+    <ion-list>
+
+        <ion-item>
+            <ion-icon name="mail-outline" size="small"></ion-icon>
+            &nbsp;&nbsp;
+            <ion-label color="warning" >อีเมลล์: {{email}}</ion-label>
+        </ion-item>
+
+        <ion-item>
+            <ion-icon name="school-outline" size="small"></ion-icon>
+            &nbsp;&nbsp;
+            <ion-label color="warning">การศึกษา: {{educational}}</ion-label>
+        </ion-item>
+
+        <ion-item>
+            <ion-icon name="library-outline" size="small"></ion-icon>
+            &nbsp;&nbsp;
+            <ion-label color="warning">คณะ: {{faculty}}</ion-label>
+        </ion-item>
+
+        <ion-item>
+            <ion-icon name="layers-outline" size="small"></ion-icon>
+            &nbsp;&nbsp;
+            <ion-label color="warning">ชั้นปี: {{year}}</ion-label>
+        </ion-item>
+
+        <ion-item>
+            <ion-icon name="logo-facebook" size="small"></ion-icon>
+            &nbsp;&nbsp;
+            <ion-label color="warning">Facebook: {{facebook}}</ion-label>
+        </ion-item>
+
+        <ion-item>
+            <ion-icon name="logo-instagram" size="small"></ion-icon>
+            &nbsp;&nbsp;
+            <ion-label color="warning">Instagram: {{instagram}}</ion-label>
+        </ion-item>
+
+        <ion-item>
+            <ion-label color="warning">อื่นๆ: {{other}}</ion-label>
+        </ion-item>
+    </ion-list>
+
+</ion-content>
